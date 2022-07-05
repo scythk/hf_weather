@@ -1,0 +1,6 @@
+{
+    "name": "Hefeng weather",
+    "country": "CN",
+    "homeassistant": "0.99.9",
+    "render_readme": true
+}

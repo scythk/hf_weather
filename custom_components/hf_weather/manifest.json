@@ -1,10 +1,12 @@
 {
   "domain": "hf_weather",
-  "name": "he feng weather",
+  "name": "Hefeng weather",
   "documentation": "https://ljr.im",
   "requirements": [],
   "dependencies": [],
   "codeowners": [
-    "@cnk700i"
-  ]
+    "@cnk700i",
+    "@scythk"
+  ],
+  "version": "2.1"
 }
