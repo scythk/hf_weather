@@ -14,7 +14,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.event import async_track_time_interval
 
 from homeassistant.components.weather import (
-    WeatherEntity, ATTR_FORECAST_CONDITION, ATTR_FORECAST_TEMP,  
+    WeatherEntity, ATTR_FORECAST_CONDITION, ATTR_FORECAST_TEMP,
     ATTR_FORECAST_TEMP_LOW, ATTR_FORECAST_PRECIPITATION, ATTR_FORECAST_TIME, PLATFORM_SCHEMA)
 from homeassistant.const import (ATTR_ATTRIBUTION, TEMP_CELSIUS, CONF_NAME)
 from homeassistant.util import Throttle
@@ -302,7 +302,7 @@ class WeatherData(object):
     def wind_speed(self):
         """风速."""
         return self._wind_speed
-    
+
     @property
     def wind_bearing(self):
         """风向."""
@@ -322,7 +322,7 @@ class WeatherData(object):
     def updatetime(self):
         """更新时间."""
         return self._updatetime
- 
+
     @property
     def aqi(self):
         """空气质量."""
@@ -354,7 +354,7 @@ class WeatherData(object):
         # 此处使用了基于aiohttp库的async_get_clientsession
         try:
             session = async_get_clientsession(self._hass)
-            with async_timeout.timeout(15, loop=self._hass.loop):
+            with async_timeout.timeout(15):
                 response = yield from session.post(
                     self._url, data=self._params)
 
@@ -407,7 +407,7 @@ class WeatherData(object):
             [forec_cond[5], int(datemsg[5]["tmp"]["max"]), int(datemsg[5]["tmp"]["min"]), datemsg[5]["date"], datemsg[5]["pcpn"], datemsg[5]["pop"]],
             [forec_cond[6], int(datemsg[6]["tmp"]["max"]), int(datemsg[6]["tmp"]["min"]), datemsg[6]["date"], datemsg[6]["pcpn"], datemsg[6]["pop"]]
             ]
-        
+
         datemsg = all_result["hourly_forecast"]
         forec_cond = []
         for n in range(7):
