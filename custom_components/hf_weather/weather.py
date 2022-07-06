@@ -179,7 +179,7 @@ class HeFengWeather(WeatherEntity):
                 ATTR_AQI: self._aqi,
                 ATTR_HOURLY_FORECAST: self.hourly_forecast,
                 ATTR_SUGGESTION: self._suggestion,
-                ATTR_CUSTOM_UI_MORE_INFO: "hf_weather-more-info"
+                ATTR_CUSTOM_UI_MORE_INFO: "hf-weather-more-info"
             }
 
     @property
@@ -202,7 +202,7 @@ class HeFengWeather(WeatherEntity):
             }
             reftime = reftime + timedelta(days=1)
             forecast_data.append(data_dict)
-        # _LOGGER.debug('forecast_data: %s', forecast_data)
+        _LOGGER.debug('forecast_data: %s', forecast_data)
         return forecast_data
 
     @property
@@ -220,7 +220,7 @@ class HeFengWeather(WeatherEntity):
                 ATTR_FORECAST_PROBABLE_PRECIPITATION: entry[3]
             }
             forecast_data.append(data_dict)
-        # _LOGGER.debug('hourly_forecast_data: %s', forecast_data)
+        _LOGGER.debug('hourly_forecast_data: %s', forecast_data)
         return forecast_data
 
     @asyncio.coroutine
@@ -363,9 +363,7 @@ class WeatherData(object):
             return
 
         if response.status != 200:
-            _LOGGER.error("Error while accessing: %s, status=%d",
-                          self._url,
-                          response.status)
+            _LOGGER.error("Error while accessing: %s, status=%d", self._url, response.status)
             return
 
         result = yield from response.json()
@@ -374,9 +372,7 @@ class WeatherData(object):
             _LOGGER.error("Request api Error")
             return
         elif result["code"] != "10000":
-            _LOGGER.error("Error API return, code=%s, msg=%s",
-                          result["code"],
-                          result["msg"])
+            _LOGGER.error("Error API return, code=%s, msg=%s", result["code"], result["msg"])
             return
 
         # 根据http返回的结果，更新数据
